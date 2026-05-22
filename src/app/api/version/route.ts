@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import pkg from '../../../../package.json';
+import packageJson from '../../../../package.json';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   return NextResponse.json({
-    version: pkg.version,
+    version: packageJson.version,
     buildTime: new Date().toISOString(),
     nodeVersion: process.version,
   });
