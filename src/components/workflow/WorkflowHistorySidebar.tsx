@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { WorkflowRun } from "@/types/workflow";
 
 interface WorkflowHistorySidebarProps {
@@ -23,14 +23,13 @@ export default function WorkflowHistorySidebar({
   activeRunId,
   onSelectRun,
 }: WorkflowHistorySidebarProps) {
-  const [collapsed, setCollapsed] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored !== null) {
-      setCollapsed(stored === "true");
+  const [collapsed, setCollapsed] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored === "true";
     }
-  }, []);
+    return false;
+  });
 
   const toggle = () => {
     const next = !collapsed;
