@@ -18,3 +18,24 @@ body {
   background-color: var(--surface-1);
   color: var(--color-text-primary);
 }
+
+/*
+ * Pre-hydration sidebar stability (TEAM-1052).
+ *
+ * The anti-flash inline script in layout.tsx <head> sets data-sidebar on
+ * <html> synchronously from localStorage BEFORE React mounts.
+ *
+ * These CSS rules consume that attribute immediately — keeping the sidebar
+ * width stable between the script running and React's first paint. Without
+ * these rules, the sidebar could briefly flash at the wrong width.
+ *
+ * Previously this attribute was "dead code" (set in layout.tsx but never
+ * read by any CSS selector or component). These rules complete the circuit.
+ */
+[data-sidebar='collapsed'] aside {
+  width: 4rem; /* w-16 */
+}
+
+[data-sidebar='expanded'] aside {
+  width: 16rem; /* w-64 */
+}
