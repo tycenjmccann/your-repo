@@ -12,10 +12,10 @@ export interface ToastProps {
 }
 
 const variantIcons: Record<ToastVariant, string> = {
-  success: '\u2713',
-  error: '\u2715',
-  warning: '\u26A0',
-  info: '\u2139',
+  success: '✓',
+  error: '✕',
+  warning: '⚠',
+  info: 'ℹ',
 }
 
 const variantLabels: Record<ToastVariant, string> = {
@@ -69,7 +69,7 @@ export const Toast: React.FC<ToastProps> = ({
         aria-label="Dismiss notification"
         type="button"
       >
-        \u2715
+        ✕
       </button>
       <div
         className="toast__progress"
